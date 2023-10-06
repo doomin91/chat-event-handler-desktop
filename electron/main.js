@@ -8,6 +8,7 @@ const path = require("path");
 // 윈도우 객체를 전역에 유지합니다. 만약 이렇게 하지 않으면
 // 자바스크립트 GC가 일어날 때 창이 멋대로 닫혀버립니다.
 let win;
+const isDev = require("electron-is-dev");
 
 function createWindow() {
   // 새로운 브라우저 창을 생성합니다.
@@ -17,7 +18,7 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
-      devTools: true,
+      devTools: isDev,
       preload: path.join(__dirname, "preload.js"),
     },
   });
@@ -26,17 +27,6 @@ function createWindow() {
   win.loadURL(`http://localhost:3000`);
   // 개발자 도구를 엽니다.
   win.webContents.openDevTools();
-
-  // fs.readFile(
-  //   "/Users/dominic/Library/Application Support/Steam/steamapps/workshop/content/108600/2915452250/mods/StatsTwitchIT/test.json",
-  //   "utf8",
-  //   function (err, data) {
-  //     if (err) {
-  //       return console.log(err);
-  //     }
-  //     console.log(data);
-  //   }
-  // );
 
   // 창이 닫히면 호출됩니다.
   win.on("closed", () => {
