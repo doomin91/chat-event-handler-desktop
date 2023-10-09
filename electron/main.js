@@ -9,6 +9,7 @@ const path = require("path");
 // 자바스크립트 GC가 일어날 때 창이 멋대로 닫혀버립니다.
 let win;
 const isDev = require("electron-is-dev");
+const fs = require("fs");
 
 function createWindow() {
   // 새로운 브라우저 창을 생성합니다.
@@ -86,6 +87,18 @@ ipcMain.on("files", async (event) => {
     });
 
   event.reply("files", { files: result });
+});
+
+ipcMain.on("appendFile", async (event) => {
+  fs.appendFile(
+    "/Users/dominic/Zomboid/Lua/rewards.txt",
+    "{1,2,3,4,5,이건한글}||",
+    function (err) {
+      if (err) throw err;
+      console.log('The "data to append" was appended to file!');
+    }
+  );
+  event.reply("done");
 });
 // 이 파일엔 제작할 애플리케이션에 특화된 메인 프로세스 코드를
 // 포함할 수 있습니다. 또한 파일을 분리하여 require하는 방법으로
