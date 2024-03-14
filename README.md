@@ -1,6 +1,6 @@
-# Twitch Handler Desktop
+# Chat Event Handler Desktop
 
-This project is desktop App with [Twitch Chatbot](https://github.com/doomin91/dominic-server)
+This project is desktop App
 
 ## Available Game Contents
 
